@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b3f">
+  <title>بوابة المعلم | اصنع طريقك</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="config.js"></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#"><span class="mark">ص</span><span><b>اصنع طريقك</b><small>بوابة المعلم</small></span></a>
+      <div class="top-actions"><span id="teacherLabel">بوابة إدارة الكورسات</span><button id="logoutBtn" class="btn light hidden">تسجيل الخروج</button></div>
+    </header>
+
+    <main>
+      <section id="loginView" class="login-wrap">
+        <div class="login-art"><div class="art-icon">🎓</div><span class="eyebrow">مساحة خاصة بالمعلمين</span><h1>شارك علمك،<br><em>واصنع أثرًا.</em></h1><p>أضف كورساتك ونظّم محتواك، وستظهر الكورسات المنشورة على منصة الطلاب.</p></div>
+        <form id="loginForm" class="panel login-panel">
+          <span class="eyebrow">مرحبًا بك</span><h2>تسجيل دخول المعلم</h2>
+          <label>البريد الإلكتروني<input name="email" type="email" autocomplete="username" required placeholder="teacher@example.com"></label>
+          <label>كلمة المرور<input name="password" type="password" autocomplete="current-password" required placeholder="كلمة المرور"></label>
+          <button class="btn primary full" type="submit">دخول إلى لوحة المعلم</button>
+          <p class="hint">الحسابات ينشئها مدير المنصة ويمنحها صلاحية المعلم.</p>
+          <p id="loginError" class="error" role="alert"></p>
+        </form>
+      </section>
+
+      <section id="dashboardView" class="hidden">
+        <div class="welcome">
+          <div><span class="eyebrow">لوحة التحكم</span><h1>أهلاً بك في مساحة المعلم</h1><p>أضف الكورسات وانشرها ليتمكن الطلاب من رؤيتها.</p></div>
+          <div class="welcome-badge">🎓</div>
+        </div>
+        <div class="stats">
+          <article class="stat"><small>إجمالي كورساتك</small><strong id="totalCount">0</strong></article>
+          <article class="stat"><small>منشور للطلاب</small><strong id="publishedCount">0</strong></article>
+          <article class="stat"><small>مسودات</small><strong id="draftCount">0</strong></article>
+        </div>
+        <div class="columns">
+          <form id="courseForm" class="panel form-panel">
+            <div class="panel-head"><div><span class="eyebrow">إدارة المحتوى</span><h2 id="formTitle">إضافة كورس جديد</h2></div><span class="plus">＋</span></div>
+            <input type="hidden" name="id">
+            <label>اسم الكورس *<input name="title" maxlength="90" required placeholder="مثال: شرح الرياضيات من الصفر"></label>
+            <div class="two">
+              <label>المادة *<input name="subject" maxlength="50" required placeholder="الرياضيات"></label>
+              <label>المرحلة التعليمية *<select name="stage" required><option value="">اختر المرحلة</option><option>المرحلة الابتدائية</option><option>المرحلة الإعدادية</option><option>المرحلة الثانوية</option><option>التعليم الجامعي</option></select></label>
+            </div>
+            <div class="two">
+              <label>اسم المعلم *<input name="teacher_name" maxlength="60" required placeholder="اسم المعلم"></label>
+              <label>عدد الدروس<input name="lessons" type="number" min="1" max="500" value="1"></label>
+            </div>
+            <label>وصف الكورس *<textarea name="description" rows="3" maxlength="400" required placeholder="اكتب نبذة واضحة عن محتوى الكورس"></textarea></label>
+            <label>رابط المحاضرات أو الفيديو أو الملف<input name="lesson_url" type="url" placeholder="https://..."></label>
+            <div class="two">
+              <label>حالة الكورس<select name="status"><option value="published">نشر للطلاب</option><option value="draft">حفظ كمسودة</option></select></label>
+              <label>رابط صورة الغلاف (اختياري)<input name="image_url" type="url" placeholder="https://..."></label>
+            </div>
+            <div class="form-actions"><button class="btn primary" type="submit" id="saveBtn">حفظ الكورس</button><button class="btn light hidden" type="button" id="cancelEditBtn">إلغاء التعديل</button></div>
+            <p id="formMessage" class="hint" role="status"></p>
+          </form>
+          <aside class="panel tips">
+            <div class="tip-icon">✦</div><h2>من المعلم إلى الطالب</h2>
+            <p>عند اختيار «نشر للطلاب»، يظهر الكورس في منصة اصنع طريقك بعد تحديث قائمة الكورسات.</p>
+            <ul><li>اكتب اسمًا واضحًا للكورس.</li><li>اختر المرحلة والمادة بدقة.</li><li>استخدم روابط تملك حق مشاركتها.</li><li>لا تضع بيانات شخصية للطلاب داخل الوصف.</li></ul>
+            <div class="sync-note"><span class="pulse"></span> قاعدة بيانات مشتركة بين المنصتين</div>
+          </aside>
+        </div>
+        <section class="panel list-panel">
+          <div class="panel-head"><div><span class="eyebrow">محتواك التعليمي</span><h2>الكورسات التي أضفتها</h2></div><button class="btn light" id="refreshBtn" type="button">تحديث القائمة ↻</button></div>
+          <div id="courseList" class="course-list"><p class="empty">سجّل الدخول لتحميل الكورسات.</p></div>
+        </section>
+      </section>
+    </main>
+    <footer>© 2026 اصنع طريقك — بوابة المعلم</footer>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
